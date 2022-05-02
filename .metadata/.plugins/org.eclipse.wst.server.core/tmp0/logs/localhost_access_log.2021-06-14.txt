@@ -1,0 +1,16 @@
+127.0.0.1 - - [14/Jun/2021:16:41:10 +0300] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [14/Jun/2021:16:41:20 +0300] "GET /Expense_Management/router/* HTTP/1.1" 500 101
+0:0:0:0:0:0:0:1 - - [14/Jun/2021:16:41:48 +0300] "GET /Expense_Management/router/user/items HTTP/1.1" 500 3039
+0:0:0:0:0:0:0:1 - - [14/Jun/2021:16:41:48 +0300] "GET /Expense_Management/router/user/items HTTP/1.1" 500 3039
+0:0:0:0:0:0:0:1 - - [14/Jun/2021:16:41:50 +0300] "GET /Expense_Management/router/user/items HTTP/1.1" 500 3039
+0:0:0:0:0:0:0:1 - - [14/Jun/2021:16:42:39 +0300] "GET /Expense_Management/router/user/items HTTP/1.1" 200 1202
+0:0:0:0:0:0:0:1 - - [14/Jun/2021:16:43:04 +0300] "GET /Expense_Management/router/user/login HTTP/1.1" 200 1183
+0:0:0:0:0:0:0:1 - - [14/Jun/2021:17:14:18 +0300] "GET /Expense_Management/router/user/add HTTP/1.1" 200 3661
+0:0:0:0:0:0:0:1 - - [14/Jun/2021:17:37:20 +0300] "GET /Expense_Management/view/user/login.jsp HTTP/1.1" 200 1188
+0:0:0:0:0:0:0:1 - - [14/Jun/2021:17:37:33 +0300] "GET /Expense_Management/view/user/login.jsp HTTP/1.1" 200 1188
+0:0:0:0:0:0:0:1 - - [14/Jun/2021:17:40:08 +0300] "GET /Expense_Management/view/user/login.jsp HTTP/1.1" 200 1220
+0:0:0:0:0:0:0:1 - - [14/Jun/2021:17:40:15 +0300] "GET /Expense_Management/view/user/login.jsp?user=aaa&pass=aaa HTTP/1.1" 200 1219
+0:0:0:0:0:0:0:1 - - [14/Jun/2021:17:42:22 +0300] "GET /Expense_Management/view/user/login.jsp HTTP/1.1" 200 1224
+0:0:0:0:0:0:0:1 - - [14/Jun/2021:17:42:31 +0300] "GET /Expense_Management/view/user/login.jsp?user=sda&pass=asda HTTP/1.1" 200 1224
+0:0:0:0:0:0:0:1 - - [14/Jun/2021:17:42:45 +0300] "GET /Expense_Management/view/user/login.jsp HTTP/1.1" 200 1224
+0:0:0:0:0:0:0:1 - - [14/Jun/2021:17:42:54 +0300] "GET /Expense_Management/view/user/login.jsp?user=aaa&pass=aa HTTP/1.1" 200 1224

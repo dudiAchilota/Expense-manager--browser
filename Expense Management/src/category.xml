@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="il.ac.hit.expensemanagement.model.Category" table="Categories">
+
+		<id name="id" type="int" column="ID" >
+			<generator class="increment"/>
+		</id>
+
+		<property name="category">
+			<column name="Category"/>
+		</property>
+		
+			
+	</class>
+</hibernate-mapping>
+
+

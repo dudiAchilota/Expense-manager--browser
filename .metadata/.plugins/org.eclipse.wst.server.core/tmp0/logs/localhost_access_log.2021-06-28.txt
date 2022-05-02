@@ -1,0 +1,7 @@
+127.0.0.1 - - [28/Jun/2021:01:17:20 +0300] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [28/Jun/2021:01:17:21 +0300] "GET /Expense_Management/ HTTP/1.1" 404 774
+0:0:0:0:0:0:0:1 - - [28/Jun/2021:02:04:28 +0300] "GET /Expense_Management/ HTTP/1.1" 404 774
+127.0.0.1 - - [28/Jun/2021:02:05:00 +0300] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [28/Jun/2021:02:05:01 +0300] "GET /Expense_Management/view/user/add.jsp HTTP/1.1" 200 2639
+0:0:0:0:0:0:0:1 - - [28/Jun/2021:02:05:27 +0300] "GET /Expense_Management/view/user/add.jsp HTTP/1.1" 200 2639
+0:0:0:0:0:0:0:1 - - [28/Jun/2021:02:05:27 +0300] "GET /favicon.ico HTTP/1.1" 404 762

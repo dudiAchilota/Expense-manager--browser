@@ -1,0 +1,126 @@
+
+window.libCostItem = {};
+
+
+//------------------------------------------------------add----------------------------------------------------------------
+
+libCostItem.addCostItem = function (item, showText) {
+    // add item new
+    $.post("http://localhost:8080/Expense_Management/router/api/add",{
+    	id : item.id, 
+    	sum : item.sum, 
+    	category : item.category,
+    	description : item.description, 
+    	date : item.date,
+    	user : item.username
+    },
+	function(mes,status){	
+		//console.log("Added successfully");
+        //showText("Added successfully", "green")
+		//showText("ERROR - In addition", "red")
+		showText("Added successfully", "green")
+			
+		 });
+   
+   
+   
+  
+
+}
+
+//------------------------------------------------------getCostsItems----------------------------------------------------------------
+
+libCostItem.getCostsItems = function (success, error) {
+    var objectStore = libCostItem.db.transaction(libCostItem.nameTableDB)
+        .objectStore(libCostItem.nameTableDB);
+    var items = [];
+
+    objectStore.openCursor().onsuccess = function (event) {
+        var cursor = event.target.result;
+        var item;
+        if (cursor) {
+            if (cursor.value.username == sessionStorage.getItem("username")) {
+                item = new CostItem(cursor.value.id, cursor.value.sum, cursor.value.category
+                    , cursor.value.description, cursor.value.date);
+                items.push(item);
+            }
+            cursor.continue();
+        }
+        // After getting all the information which DB
+        if (cursor == null) {
+            success(items);
+        }
+
+    }
+
+    objectStore.openCursor().onerror = function (event) {
+        libCostItem.costManagerException("Error - in function getCostsItems");
+        error("Error - cannot find data or empty data");
+    }
+
+};
+
+
+libCostItem.getCostsPerMonth = function (year, month, success, error) {
+
+    var objectStore = libCostItem.db.transaction(libCostItem.nameTableDB)
+        .objectStore(libCostItem.nameTableDB);
+    var items = [];
+
+    objectStore.openCursor().onsuccess = function (event) {
+        var cursor = event.target.result;
+        var item;
+        if (cursor) {
+            if (cursor.value.username == sessionStorage.getItem("username")) {
+                item = new CostItem(cursor.value.id, cursor.value.sum, cursor.value.category
+                    , cursor.value.description, cursor.value.date);
+                items.push(item);
+            }
+            cursor.continue();
+        }
+        if (cursor == null) {
+            // item only month specific
+            items = items.filter(x => x.getYear() == year && x.getMonth() == month);
+
+            var map = new Map()
+            var number = 0;
+            for (var i = 0; i < items.length; i++) {
+                if (!map.has(items[i].getCategory())) {
+                    map.set(items[i].getCategory(), Number(items[i].getSum()));
+                } else {
+                    number = Number(map.get(items[i].getCategory()));
+                    map.set(items[i].getCategory(), Number(items[i].getSum()) + number);
+                }
+            }
+            success(items, map);
+        }
+
+    }
+
+    objectStore.openCursor().onerror = function (event) {
+        libCostItem.costManagerException("Error - in function getCostsPerMonth")
+        error("Error - cannot find data or empty data");
+    }
+
+};
+
+
+
+class CostItem {
+    id;
+    sum;
+    category;
+    description;
+    date;
+    username;
+
+    constructor(id, sum, category, description, date, username) {
+        this.id(id);
+        this.sum(sum);
+        this.category(category);
+        this.category(category);
+        this.date(date);
+        this.username(username);
+    }
+}
+

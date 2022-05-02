@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="icon" href="logo.png" type="image/x-icon">
+
+    <script src="library.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Crafty Girls' rel='stylesheet'>
+    <style> * {font-family: 'Crafty Girls';}</style>
+
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css"/>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+</head>
+<body>
+
+<div data-role="page" id="login">
+    <div data-role="header" data-position="fixed">
+        <!--link   !-->
+        <h1>login</h1>
+        <a onclick="lib.open('register.html');" data-role="button" data-theme="b">register</a>
+
+    </div>
+
+    <div data-role="content" data-theme="a"
+    	 style="width: 40%; text-align: center;margin: auto;"  >
+        <h3 style="text-align: center">Please sign in</h3>
+        <label for="username-login" class="ui-hidden-accessible">Username:</label>
+        <input onfocus="lib.focusColor('username-login')" onfocusout="lib.focusOff('username-login')"
+               type="text" name="username" id="username-login" placeholder="username" data-theme="a">
+        <br/>
+        <label for="password-login" class="ui-hidden-accessible">Password:</label>
+        <input onfocus="lib.focusColor('password-login')" onfocusout="lib.focusOff('password-login')" width="10px"
+               type="password" name="password" id="password-login" placeholder="password" data-theme="a">
+        <br/>
+        <button onclick="lib.loginToApp();">Sign in</button>
+    </div>
+
+
+    <!--footer  !-->
+    <div data-role="footer">
+        <!--message   !-->
+        <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="text-align:center">
+            <h3 id="message-login"></h3>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>register</title>
+<link rel="icon" href="pictures/logo.png" type="image/x-icon">
+
+<script src="library.js"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />
+	
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Crafty Girls'rel='stylesheet'>
+<style>
+* {font-family: 'Crafty Girls';}
+</style>
+
+</head>
+<body>
+	<div data-role="page" id="register">
+		<div data-role="header" data-position="fixed">
+			<a onclick="lib.open('login.html');" data-role="button"
+				data-theme="b">login</a>
+			<h2>registration</h2>
+		</div>
+
+		<div data-role="content" data-theme="a"`
+			style="width: 35%; text-align: center; margin: auto;">
+			<label for="username-register" class="ui-hidden-accessible">Username:</label>
+			<input type="text" name="username" id="username-register"
+				placeholder="username" data-theme="a"> <label
+				for="password-register" class="ui-hidden-accessible">Password:</label>
+			<input type="text" name="password" id="password-register"
+				placeholder="password" data-theme="a">
+
+			<button onclick="lib.register()">registration</button>
+		</div>
+		<!--footer  !-->
+		<div data-role="footer">
+			<!--message   !-->
+			<div data-role="controlgroup" data-type="horizontal" data-mini="true"
+				style="text-align: center">
+				<h3 id="message-register"></h3>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
