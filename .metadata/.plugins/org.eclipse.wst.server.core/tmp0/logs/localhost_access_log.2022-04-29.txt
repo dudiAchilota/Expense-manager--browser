@@ -1,6 +1,0 @@
-0:0:0:0:0:0:0:1 - - [29/Apr/2022:01:40:08 +0300] "GET /Expense_Management/html/home.html HTTP/1.1" 304 -
-0:0:0:0:0:0:0:1 - - [29/Apr/2022:01:40:08 +0300] "GET /Expense_Management/html/library.js HTTP/1.1" 200 15819
-0:0:0:0:0:0:0:1 - - [29/Apr/2022:01:40:08 +0300] "GET /Expense_Management/html/pictures/main.png HTTP/1.1" 304 -
-0:0:0:0:0:0:0:1 - - [29/Apr/2022:01:40:09 +0300] "POST /Expense_Management/router/api/session HTTP/1.1" 200 36
-0:0:0:0:0:0:0:1 - - [29/Apr/2022:01:40:09 +0300] "POST /Expense_Management/router/api/home HTTP/1.1" 500 40
-0:0:0:0:0:0:0:1 - - [29/Apr/2022:01:40:09 +0300] "GET /Expense_Management/html/login.html HTTP/1.1" 304 -

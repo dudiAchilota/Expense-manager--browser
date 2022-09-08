@@ -1,6 +1,0 @@
-127.0.0.1 - - [17/Jun/2021:20:20:19 +0300] "GET / HTTP/1.1" 404 751
-0:0:0:0:0:0:0:1 - - [17/Jun/2021:20:20:21 +0300] "GET /Expense_Management/router/* HTTP/1.1" 500 101
-0:0:0:0:0:0:0:1 - - [17/Jun/2021:20:20:35 +0300] "GET /Expense_Management/router/user/add HTTP/1.1" 200 3661
-0:0:0:0:0:0:0:1 - - [17/Jun/2021:20:20:36 +0300] "GET /Expense_Management/router/user/add HTTP/1.1" 200 3661
-0:0:0:0:0:0:0:1 - - [17/Jun/2021:20:21:35 +0300] "GET /Expense_Management/router/user/add HTTP/1.1" 200 3639
-0:0:0:0:0:0:0:1 - - [17/Jun/2021:20:21:35 +0300] "GET /Expense_Management/router/user/add HTTP/1.1" 200 3639
