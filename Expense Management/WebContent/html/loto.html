@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+.box-10 {
+  float: left;
+  width: 10.00%;
+  padding: 5px;
+  background-color:goldenrod;
+}
+.box {
+  float: left;
+  width: 10.00%;
+  padding: 7px;
+  background-color:rgb(162, 176, 202);
+} 
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+
+</head>
+<body>
+
+<div class="clearfix">
+
+    <div class="box-10">
+      <h4 id="l1"></h4>
+     </div>
+     <div class="box-10">
+      <h4 id="l2"></h4>
+     </div>
+     <div class="box-10">
+      <h4 id="l3"></h4>
+     </div>
+
+     <div class="box-10">
+      <h4 id="l4"></h4>
+     </div>
+     <div class="box-10">
+      <h4 id="l5"></h4>
+     </div>
+     <div class="box-10">
+      <h4 id="l6"></h4>
+     </div>
+     <button ondblclick="game();" data-role="none">Button</button>
+</div>
+
+<h2>Grid of Boxes</h2>
+
+<div class="clearfix">
+
+  <div class="box" id="div-1">
+  <p>numper 1: count <strong id="num-1"></strong></p>
+  </div>
+  <div class="box" id="div-2">
+  <p>numper 2: count <strong id="num-2"></strong></p>
+  </div>
+  <div class="box" id="div-3">
+  <p>numper 3: count <strong id="num-3"></strong></p>
+  </div>
+  <div class="box" id="div-4">
+  <p>numper 4: count <strong id="num-4"></strong></p>
+  </div>
+  <div class="box" id="div-5">
+  <p>numper 5: count <strong id="num-5"></strong></p>
+  </div>
+
+  <div class="box" id="div-6">
+  <p>numper 6: count <strong id="num-6"></strong></p>
+  </div>
+  <div class="box" id="div-7">
+  <p>numper 7: count <strong id="num-7"></strong></p>
+  </div>
+  <div class="box" id="div-8">
+  <p>numper 8: count <strong id="num-8"></strong></p>
+  </div>
+  <div class="box" id="div-9">
+  <p>numper 9: count <strong id="num-9"></strong></p>
+  </div>
+  <div class="box" id="div-10">
+  <p>numper 10: count <strong id="num-10"></strong></p>
+  </div> 
+
+  <div class="box" id="div-11">
+    <p>numper 11: count <strong id="num-11"></strong></p>
+    </div>
+    <div class="box" id="div-12">
+    <p>numper 12: count <strong id="num-12"></strong></p>
+    </div>
+    <div class="box" id="div-13">
+    <p>numper 13: count <strong id="num-13"></strong></p>
+    </div>
+    <div class="box" id="div-14">
+    <p>numper 14: count <strong id="num-14"></strong></p>
+    </div>
+    <div class="box" id="div-15">
+    <p>numper 15: count <strong id="num-15"></strong></p>
+    </div>
+  
+    <div class="box" id="div-16">
+    <p>numper 16: count <strong id="num-16"></strong></p>
+    </div>
+    <div class="box" id="div-17">
+    <p>numper 17: count <strong id="num-17"></strong></p>
+    </div>
+    <div class="box" id="div-18">
+    <p>numper 18: count <strong id="num-18"></strong></p>
+    </div>
+    <div class="box" id="div-19">
+    <p>numper 19: count <strong id="num-19"></strong></p>
+    </div>
+    <div class="box" id="div-20">
+    <p>numper 20: count <strong id="num-20"></strong></p>
+    </div>   
+
+  <div class="box" id="div-21">
+    <p>numper 21: count <strong id="num-21"></strong></p>
+    </div>
+    <div class="box" id="div-22">
+    <p>numper 22: count <strong id="num-22"></strong></p>
+    </div>
+    <div class="box" id="div-23">
+    <p>numper 23: count <strong id="num-23"></strong></p>
+    </div>
+    <div class="box" id="div-24">
+    <p>numper 24: count <strong id="num-24"></strong></p>
+    </div>
+    <div class="box" id="div-25">
+    <p>numper 25: count <strong id="num-25"></strong></p>
+    </div>
+  
+    <div class="box" id="div-26">
+    <p>numper 26: count <strong id="num-26"></strong></p>
+    </div>
+    <div class="box" id="div-27">
+    <p>numper 27: count <strong id="num-27"></strong></p>
+    </div>
+    <div class="box" id="div-28">
+    <p>numper 28: count <strong id="num-28"></strong></p>
+    </div>
+    <div class="box" id="div-29">
+    <p>numper 29: count <strong id="num-29"></strong></p>
+    </div>
+    <div class="box" id="div-30">
+    <p>numper 30: count <strong id="num-30"></strong></p>
+    </div> 
+
+      <div class="box" id="div-31">
+      <p>numper 31: count <strong id="num-31"></strong></p>
+      </div>
+      <div class="box" id="div-32">
+      <p>numper 32: count <strong id="num-32"></strong></p>
+      </div>
+      <div class="box" id="div-33">
+      <p>numper 33: count <strong id="num-33"></strong></p>
+      </div>
+      <div class="box" id="div-34">
+      <p>numper 34: count <strong id="num-34"></strong></p>
+      </div>
+      <div class="box" id="div-35">
+      <p>numper 35: count <strong id="num-35"></strong></p>
+      </div>
+    
+      <div class="box" id="div-36">
+      <p>numper 36: count <strong id="num-36"></strong></p>
+      </div>
+      <div class="box" id="div-37">
+      <p>numper 37: count <strong id="num-37"></strong></p>
+      </div>
+ 
+</div>
+
+</body>
+
+
+<script>
+
+  function lottery(){
+    let map = new Map();
+    let num //, i = 0;
+    while(map.size != 6){
+      num = Math.floor(Math.random() * 37) + 1;
+      map.set(num,num);
+  }
+   // map.sort((a, b) => a - b);
+    console.log(map);
+  
+    return map;
+    }
+// =====================================================================
+  function seve(map){
+    let arr;
+    let loto = localStorage.getItem("loto");
+
+    if(loto == null){    
+      //let numStrong = new Array(8);
+      arr = new Array(38);
+      arr.fill(0);
+    }else{
+      arr = JSON.parse(loto);
+    }
+ 
+    var values = map.values();
+    for(var val of values){
+      arr[val]++;
+    }
+
+    localStorage.setItem("loto", JSON.stringify(arr));
+    console.log(arr)
+    return arr;
+  }
+// =====================================================================
+  function desply(map){
+    var values = map.values();
+    var i=1;
+    for(var val of values){
+      document.getElementById("l"+i).innerHTML = val;
+      i++;
+   }
+  }
+// =====================================================================
+  function desplyArr(arr){ 
+    let arrCopy = arr.map(x => x);
+
+    arrCopy.sort((a, b) => a - b);
+
+    let max = arrCopy[32];
+    let min = arrCopy[6];
+    console.log(arrCopy);
+
+    for(var i = 1; i < 38; i++){ 
+      document.getElementById("num-"+i).innerHTML = arr[i];
+
+      if(max <= Number(arr[i])){
+        document.getElementById("div-"+i).style.backgroundColor = "red";
+      }
+
+      if(min >= Number(arr[i])){
+        document.getElementById("div-"+i).style.backgroundColor = "antiquewhite";
+      }
+   }   
+  }
+// =====================================================================
+  function game(){
+    let map = lottery();
+    desply(map);
+    let arr = seve(map);
+    desplyArr(arr);
+  }
+  
+  game();
+
+
+
+</script>
+</html>

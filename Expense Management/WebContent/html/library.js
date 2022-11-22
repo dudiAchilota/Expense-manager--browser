@@ -4,7 +4,7 @@ lib.url = "http://localhost:8080/ExpenseManagement/";
 //------------------------------------------------------all-page----------------------------------------------------------------
 
 lib.open = function (file) {
-	window.open(file,"_parent");
+    window.open(file, "_parent");
 };
 
 lib.messageToUser = function (id, mes, color = "") {
@@ -19,63 +19,65 @@ lib.focusColor = function (id) {
 
 lib.focusOff = function (id) {
     document.getElementById(id).style.backgroundColor = "";
-    document.getElementById(id).style.color = "";
 }
 
 //------------------------------------------------------session----------------------------------------------------------------
 
 
 lib.checkSessionUser = function (id) {
-   fetch(lib.url + "session", {
+    fetch(lib.url + "session", {
         method: 'POST',
-        headers: {  'Content-Type': 'application/json',},
+        headers: { 'Content-Type': 'application/json', },
     })
         .then((response) => response.json())
         .then((object) => {
-		   		if(object.ok == 0){
-		    		lib.open("login.html")
-		    	}
-		    	if(object.ok == 1 ){
-		    		document.getElementById(id).innerHTML = "Hello " + object.user + " ,";
-		    	}
+
+            if (object.ok == 0) {
+                lib.open("login.html")
+            }
+            if (object.ok == 1) {
+                document.getElementById(id).innerHTML = "Hello " + object.user + " ,";
+            }
         });
 }
 
 
 lib.logOut = function () {
-   fetch(lib.url + "logout", {
+    fetch(lib.url + "logout", {
         method: 'POST',
-        headers: {  'Content-Type': 'application/json',},
+        headers: { 'Content-Type': 'application/json', },
     })
         //.then((response) => response.json())
         .then((data) => {
             lib.open("login.html");
+
         });
 }
 
 //------------------------------------------------------register----------------------------------------------------------------
 lib.register = function () {
-	lib.messageToUser('message-register',"...","red");
+    lib.messageToUser('message-register', "...", "red");
     let username = document.getElementById('username-register').value.trim();
     let password = document.getElementById('password-register').value.trim();
-		
+
     // check value
     let check = checkValue(username, password);
     if (check == 0)
         return;
 
     const data = {
-           userName : username,
-           password : password,
-         };
-   fetch(lib.url + "registration", {
+        userName: username,
+        password: password,
+    };
+    fetch(lib.url + "registration", {
         method: 'POST',
-        headers: {'Content-Type': 'application/json',},
+        headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(data),
     })
         .then((response) => response.json())
         .then((data) => {
-            lib.messageToUser('message-register',data.message,"red");
+            lib.messageToUser('message-register', data.message, "red");
+
         });
 
     function checkValue(username, password) {
@@ -83,7 +85,7 @@ lib.register = function () {
         if (username != "" && password != "") {
             check = 1;
         } else {
-            lib.messageToUser('message-register',"Error- Missing or incorrect value","red");
+            lib.messageToUser('message-register', "Error- Missing or incorrect value", "red");
             check = 0;
         }
         return check;
@@ -93,48 +95,48 @@ lib.register = function () {
 //------------------------------------------------------login----------------------------------------------------------------
 
 lib.loginToApp = function () {
-	lib.messageToUser('message-login',".","red");
-	
+    lib.messageToUser('message-login', ".", "red");
+
     let username = document.getElementById('username-login').value.trim();
     let password = document.getElementById('password-login').value;
 
-	const data = {
-               userName : username,
-               password : password,
-             };
+    const data = {
+        userName: username,
+        password: password,
+    };
     fetch(lib.url + "login", {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json',},
-            body: JSON.stringify(data),
-        })
-            .then((response) => response.json())
-            .then((object) => {
-	            if(object.ok == 1)
-                    lib.open("home.html");
-                else
-                	lib.messageToUser('message-login',object.message,"red");
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(data),
+    })
+        .then((response) => response.json())
+        .then((object) => {
+            if (object.ok == 1)
+                lib.open("home.html");
+            else
+                lib.messageToUser('message-login', object.message, "red");
 
-            });
+        });
 }
 
 //------------------------------------------------------add-----------------------------------------------------------------
 
 lib.showText = function (text, color) {
-	lib.messageToUser('message-add',text,color);
+    lib.messageToUser('message-add', text, color);
 }
 
 lib.restart = function () {
     document.getElementById("sum").value = "";
     document.getElementById("description").value = "";
     document.getElementById("date").value = "";
-    //document.getElementById('message-add').innerHTML = "";
+    document.getElementById('message-add').innerHTML = "";
 }
 
 lib.add = function () {
     // get data from user
-    let sum = document.getElementById("sum").value;
+    let sum = document.getElementById("sum").value//.trim();
     let category = document.getElementById("category").value;
-    let description = document.getElementById("description").value.trim();
+    let description = document.getElementById("description").value//.trim();
     let date = document.getElementById("date").value;
 
     // check input
@@ -156,134 +158,134 @@ lib.add = function () {
 
 
 lib.addItemToDB = function (item, showText) {
-	showText("...", "green")
+    showText("...", "green")
 
     const data = {
-                id : 0,
-             	sum : item.sum,
-             	category : item.category,
-             	description : item.description,
-             	date : item.date,
-             	nameUser : item.username
+        id: 0,
+        sum: item.sum,
+        category: item.category,
+        description: item.description,
+        date: item.date,
+        nameUser: item.username
     };
 
-        // add item new
-        fetch(lib.url + "add", {
+    // add item new
+    fetch(lib.url + "add", {
         method: 'POST',
-        headers: {  'Content-Type': 'application/json',},
+        headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(data),
-        })
+    })
         .then((response) => response.json())
         .then((data) => {
-                  console.log(data.ok);
-                  console.log(data.message);
- 		   	if(data.ok == 1){
- 		   		showText("Added successfully", "green")
- 		   		lib.restart();
- 		   }else
- 				showText(data.message, "red")
+            console.log(data.ok);
+            console.log(data.message);
+            if (data.ok == 1)
+                showText("Added successfully", "green")
+            else
+                showText(data.message, "red")
         });
-    }
+
+
+}
+
 
 
 //------------------------------------------------------table----------------------------------------------------------------
 
-//lib.getItems = function (success, error) {
-//	let items = [];
-//
-//    fetch(lib.url + "items", {
-//        method: 'POST',
-//        headers: {'Content-Type': 'application/json',},
-//
-//        })
-//        .then((response) => response.json())
-//        .then((data) => {
-//            let list = data.items;
-//            list.forEach(
-//                function (ob) {
-//                        items.push(new CostItem(ob.id, ob.sum, ob.category, ob.description, ob.date, ob.username));
-//                     });
-//                 if(items.length == 0)
-//                 	{error("no data");}
-//                 else
-//             		{success(items);}
-//        });
-//}
+lib.getItems = function (success, error) {
+    let items = [];
 
-//lib.successCostsItems = function (items) {
-//    // reset message
-//    document.getElementById('message-table').innerHTML = "";
-//    let tbody = document.getElementById('tbody-table');
-//
-//    // remove table
-//    while (tbody.firstChild) {
-//        tbody.removeChild(tbody.firstChild);
-//    }
-//    // update table
-//    items.forEach(
-//        function (ob) {
-//            // add data to table
-//            let tr = document.createElement("tr");
-//            let td;
-//            td = document.createElement("td");
-//            td.appendChild(document.createTextNode(ob.sum));
-//            tr.appendChild(td);
-//
-//            td = document.createElement("td");
-//            td.appendChild(document.createTextNode(ob.category));
-//            tr.appendChild(td);
-//
-//            td = document.createElement("td");
-//            td.appendChild(document.createTextNode(ob.date));
-//            tr.appendChild(td);
-//
-//            td = document.createElement("td");
-//            td.appendChild(document.createTextNode(ob.description));
-//            tr.appendChild(td);
-//
-//  			let button = document.createElement("a");
-//			button.setAttribute("onclick", "lib.deleteItem(" +ob.id+ ");");
-//  			button.appendChild(document.createTextNode("delete"));
-//         	tr.appendChild(button);
-//
-//            tbody.appendChild(tr);
-//        });
-//}
+    fetch(lib.url + "items", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', },
+
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            let list = data.items;
+            list.forEach(
+                function (ob) {
+                    items.push(new CostItem(ob.id, ob.sum, ob.category, ob.description, ob.date, ob.username));
+                });
+            if (items.length == 0) { error("no data"); }
+            else { success(items); }
+        });
+}
+
+lib.successCostsItems = function (items) {
+    // reset message
+    document.getElementById('message-table').innerHTML = "";
+    let tbody = document.getElementById('tbody-table');
+
+    // remove table
+    while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+    }
+    // update table    
+    items.forEach(
+        function (ob) {
+            // add data to table
+            let tr = document.createElement("tr");
+            let td;
+            td = document.createElement("td");
+            td.appendChild(document.createTextNode(ob.sum));
+            tr.appendChild(td);
+
+            td = document.createElement("td");
+            td.appendChild(document.createTextNode(ob.category));
+            tr.appendChild(td);
+
+            td = document.createElement("td");
+            td.appendChild(document.createTextNode(ob.date));
+            tr.appendChild(td);
+
+            td = document.createElement("td");
+            td.appendChild(document.createTextNode(ob.description));
+            tr.appendChild(td);
+
+            let button = document.createElement("a");
+            button.setAttribute("onclick", "lib.deleteItem(" + ob.id + ");");
+            button.appendChild(document.createTextNode("delete"));
+            tr.appendChild(button);
+
+            tbody.appendChild(tr);
+        });
+}
 
 lib.errorCostsItems = function (text) {
     document.getElementById('message-table').innerHTML = text;
     document.getElementById('message-table').style.color = "red";
 }
 
- 
+
 //-----------------------------------------------------report------------------------------------------------------------------
 
 
 
 lib.getReport = function (dateFrom, dateTo, success, error) {
     const data = {
-   			 start : dateFrom,
-    		 end : dateTo
+        start: dateFrom,
+        end: dateTo
     };
     fetch(lib.url + "report", {
         method: 'POST',
-        headers: {'Content-Type': 'application/json',},
+        headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(data),
-        })
+    })
         .then((response) => response.json())
         .then((object) => {
 
-		let list = object.items;
-		let sumTotal = object.sum;
-		let items = [];
+            let list = object.items;
+            let sumTotal = object.sum;
+            let items = [];
 
-        list.forEach(
-            function (ob) {
-                items.push(new CostItem(ob.id, ob.sum, ob.category, ob.description, ob.date, ob.username));
-            });
+            list.forEach(
+                function (ob) {
+                    items.push(new CostItem(ob.id, ob.sum, ob.category, ob.description, ob.date, ob.username));
+                });
 
-          	let map = new Map();
-         	let number = 0;
+            let map = new Map();
+            let number = 0;
             for (let i = 0; i < items.length; i++) {
                 if (!map.has(items[i].category)) {
                     map.set(items[i].category, Number(items[i].sum));
@@ -292,17 +294,17 @@ lib.getReport = function (dateFrom, dateTo, success, error) {
                     map.set(items[i].category, Number(items[i].sum) + number);
                 }
             }
-            success(items, map,sumTotal);
+            success(items, map, sumTotal);
         });
- }
+}
 
 
 
 lib.getItemsReport = function () {
     let dateFrom = document.getElementById("date-from").value;
     let dateTo = document.getElementById("date-to").value;
-    
-    if (dateFrom != "" && dateTo  != "" ) {
+
+    if (dateFrom != "" && dateTo != "") {
         lib.getReport(dateFrom, dateTo, lib.successReport, lib.errorReport);
         document.getElementById('message-report').innerHTML = "";
     } else {
@@ -311,11 +313,11 @@ lib.getItemsReport = function () {
     }
 }
 
-lib.successReport = function (items, map,sumTotal) {
+lib.successReport = function (items, map, sumTotal) {
 
-	let tbodyAllItem = document.getElementById('tbody-all-item');
-	let tbodyCategory = document.getElementById('tbody-category');
-	
+    let tbodyAllItem = document.getElementById('tbody-all-item');
+    let tbodyCategory = document.getElementById('tbody-category');
+
     // reset message
     document.getElementById('message-report').innerHTML = "";
     lib.addPieChart(map);
@@ -323,7 +325,7 @@ lib.successReport = function (items, map,sumTotal) {
     // delete table
     while (tbodyAllItem.firstChild) {
         tbodyAllItem.removeChild(tbodyAllItem.firstChild);
-    }    
+    }
     while (tbodyCategory.firstChild) {
         tbodyCategory.removeChild(tbodyCategory.firstChild);
     }
@@ -349,12 +351,12 @@ lib.successReport = function (items, map,sumTotal) {
             td = document.createElement("td");
             td.appendChild(document.createTextNode(ob.description));
             tr.appendChild(td);
-            
+
             tbodyAllItem.appendChild(tr);
         });
 
     // ------------------------tbodyCategory add table -----------------
-  
+
     let key = map.keys();
     let val = map.values();
 
@@ -371,12 +373,12 @@ lib.successReport = function (items, map,sumTotal) {
 
         tbodyCategory.appendChild(tr);
     }
-    
-    if(sumTotal != 0)
-		lib.messageToUser('sum-total',"sum total = " +sumTotal,"red");
-	else
-		lib.messageToUser('sum-total',"not data","red");
-	
+
+    if (sumTotal != 0)
+        lib.messageToUser('sum-total', "sum total = " + sumTotal, "red");
+    else
+        lib.messageToUser('sum-total', "not data", "red");
+
 }
 
 lib.errorReport = function (text) {
@@ -386,7 +388,7 @@ lib.errorReport = function (text) {
 
 lib.addPieChart = function (map) {
 
-    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.load('current', { 'packages': ['corechart'] });
     // array of category and sum
     let key = map.keys();
     let val = map.values();
@@ -395,24 +397,25 @@ lib.addPieChart = function (map) {
     for (let i = 0; i < map.size; i++) {
         vec.push([key.next().value, val.next().value]);
     }
-    
+
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
         let data = google.visualization.arrayToDataTable(vec);
         let options = {
-        title: 'My costs' , is3D : true ,legend :{position: 'top', textStyle: {color: 'blue', fontSize: 20}} };
+            title: 'My costs', is3D: true, legend: { position: 'top', textStyle: { color: 'blue', fontSize: 20 } }
+        };
         let chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
     }
 }
 
 
-lib.searchTable = function (){
-    $(document).ready(function(){
-        $("#Search").on("keyup", function() {
+lib.searchTable = function () {
+    $(document).ready(function () {
+        $("#Search").on("keyup", function () {
             var value = $(this).val().toLowerCase();
-            $("#tbody-table tr").filter(function() {
+            $("#tbody-table tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
@@ -422,14 +425,15 @@ lib.searchTable = function (){
 
 //-----------------------------------------------------delete------------------------------------------------------------------
 
-lib.deleteItem = function (id){
+lib.deleteItem = function (id) {
+    // add item new
     fetch(lib.url + "delete/" + id, {
         method: 'GET',
-        headers: {  'Content-Type': 'application/json',},
-        })
-      //  .then((response) => response.json())
+        headers: { 'Content-Type': 'application/json', },
+    })
+        //  .then((response) => response.json())
         .then(() => {
-             lib.open("table.html");
+            lib.open("table.html");
         });
 }
 
@@ -437,58 +441,61 @@ lib.deleteItem = function (id){
 
 //-----------------------------------------------------home------------------------------------------------------------------
 
-lib.home = function (){
-  
-  	let date = new Date();
-  	let year = date.getFullYear();
-  	let month = date.getMonth();
+lib.home = function () {
 
-//  	const data = {
-//    	year : year ,
-//    	month : month
-//     };
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth();
+
+    const data = {
+        year: year,
+        month: month
+    };
 
     fetch(lib.url + "home", {
-          method: 'POST',
-          headers: {  'Content-Type': 'application/json',},
-       //   body: JSON.stringify(data),
-          })
-          .then((response) => response.json())
-          .then((object) => {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', },
+        //   body: JSON.stringify(data),
+    })
+        .then((response) => response.json())
+        .then((object) => {
 
-          		let list = object.items;
-          		let sum = [object.current];
+            let list = object.items;
+            let sum = [object.current];
 
-                list.forEach(function (ob) {
-                          sum.push(ob.sum);
-                      });
-                let months = ["Current month"],m;
-                for(let i=0;i<6;i++){
-                  	m = month - i ;
-                  	if (m > 0)
-                  		months.push(m);
-                  	else
-                  		months.push(m + 12);
-                  }
-          		lib.addHalfYear(sum,months);
+            list.forEach(function (ob) {
+                sum.push(ob.sum);
             });
+            let months = ["Current month"], m;
+            for (let i = 0; i < 6; i++) {
+                m = month - i;
+                if (m > 0)
+                    months.push(m);
+                else
+                    months.push(m + 12);
+            }
+
+            lib.addHalfYear(sum, months);
+
+        });
 }
 
 
-lib.addHalfYear = function (sum,months){
+lib.addHalfYear = function (sum, months) {
 
-	let barColors = ["gold" ,"red","green","blue","orange","brown","red"];
+    let barColors = ["gold", "red", "green", "blue", "orange", "brown", "red"];
 
-	new Chart("chart-home", {
-  		type: "bar",
-  		data: { labels: months,    	
-    	datasets: [{backgroundColor: barColors, data: sum }]
-  		},
-  	options: {
-    	legend: {display: false},
-    	title: { display: true,  text: "Expenditure in the last half year"}   
-  		}
-	});
+    new Chart("chart-home", {
+        type: "bar",
+        data: {
+            labels: months,
+            datasets: [{ backgroundColor: barColors, data: sum }]
+        },
+        options: {
+            legend: { display: false },
+            title: { display: true, text: "Expenditure in the last half year" }
+        }
+    });
 }
 
 
@@ -506,7 +513,7 @@ class CostItem {
         this.id = id;
         this.sum = sum;
         this.category = category;
-        this.description =description;
+        this.description = description;
         this.date = date;
         this.username = username;
     }

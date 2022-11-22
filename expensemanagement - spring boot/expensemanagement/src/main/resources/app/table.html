@@ -11,8 +11,30 @@
     <script src="https://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
 
     <link href='https://fonts.googleapis.com/css?family=Crafty Girls' rel='stylesheet'>
-    <style> h2,h1,* {font-family: 'Crafty Girls';}</style>
+    <style> h2,h2,h3{font-family: 'Crafty Girls';}</style>
 
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 60%;
+      }
+
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 5px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+      tr:hover {background-color: yellowgreen;}
+    </style>
 </head>
 <body>
 
@@ -35,7 +57,7 @@
         <h1>table - all expense</h1>
         <!--logout   !-->
         <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-b"
-            href="#popup-logout" data-rel="popup" data-position-to="window" data-transition="pop">log-out</a>
+           href="#popup-logout" data-rel="popup" data-position-to="window" data-transition="pop">log-out</a>
         <div data-role="popup" id="popup-logout" data-overlay-theme="b" data-theme="b" data-dismissible="false"
              style="max-width:300px;">
             <div data-role="header" data-theme="a">
@@ -50,32 +72,36 @@
         </div>
 
     </div>
-    
-        <!--user hello  !-->
-        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+
+    <!--user hello  !-->
+    <div data-role="controlgroup" data-type="horizontal" data-mini="true">
         <h2 id="name-table"></h2>
-        </div>	
+    </div>
 
     <!--content table   !-->
-    <div data-role="content" style="float:left ; width: 30%;padding: 20px;">
-        <input class="form-control" id="Search" type="text" placeholder="Search..." >        	     	
-        <table border="3" >
-            <tr id="tr">
-                <th onclick="">sum</th>
-                <th onclick="">category</th>
-                <th onclick="">date</th>
-                <th onclick="">description</th>
-               	<th onclick="">delete</th>
-                
-            </tr>
-            <tbody id="tbody-table">            
-            </tbody>
-        </table>        
+    <div data-role="content" >
+        <div style="width: 60%;">
+            <input class="form-control" id="Search" type="text" placeholder="Search..."/>
+        </div>
+        <div id="root">
+        </div>
+<!--        <table border="3">-->
+<!--            <tr id="tr">-->
+<!--                <th onclick="">sum</th>-->
+<!--                <th onclick="">category</th>-->
+<!--                <th onclick="">date</th>-->
+<!--                <th onclick="">description</th>-->
+<!--                <th onclick="">delete</th>-->
+
+<!--            </tr>-->
+<!--            <tbody id="tbody-table">-->
+<!--            </tbody>-->
+<!--        </table>-->
     </div>
-    
-        <!--message   !-->
-        <h3 id="message-table" style="text-align: center"></h3>
-        
+
+    <!--message   !-->
+    <h3 id="message-table" style="text-align: center"></h3>
+
     <!-- footer  data-role="footer" !-->
     <div>
         <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="text-align:left">
@@ -85,10 +111,92 @@
 
     <script>
         lib.checkSessionUser("name-table");
-        setTimeout(function () {lib.getItems(lib.successCostsItems, lib.errorCostsItems);}, 100);        
+       // setTimeout(function () {lib.getItems(lib.successCostsItems, lib.errorCostsItems);}, 100);
         lib.searchTable();         
-    </script>
 
+    </script>
+    <script type="text/babel">
+      function App() {
+        return (
+          <div>
+            <TableItems />
+          </div>
+        )
+      }
+
+     class TableItems extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        error: null,
+        isLoaded: false,
+        items: []
+      };
+      document.getElementById('message-table').innerHTML = "";
+    }
+
+    deleteRow(id, e) {
+        lib.deleteItem(id);
+    }
+
+    componentDidMount() {
+      fetch(lib.url + "items", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', },
+      })
+        .then(res => res.json())
+        .then((result) => {
+            this.setState({
+                isLoaded: true,
+                items: result.items
+            });
+          },
+          (error) => {
+            this.setState({
+              isLoaded: true,
+              error
+            });
+            lib.errorCostsItems("no data");
+          }
+        )
+    }
+
+    render() {
+      const { error, isLoaded, items } = this.state;
+      const listItems = items.map((ob) =>
+        <tr id={ob.id}>
+          <td>{ob.sum}</td>
+          <td>{ob.category}</td>
+          <td>{ob.description}</td>
+          <td>{ob.date}</td>
+          <button onClick={(e) => this.deleteRow(ob.id, e)}>delete</button>
+        </tr>
+      );
+      if (error) {
+        return <div>Error: {error.message}</div>;
+      } else if (!isLoaded) {
+        return <div>Loading...</div>;
+      } else {
+        return (
+          <table>
+            <tr>
+              <th>sum</th>
+              <th>category</th>
+              <th>description</th>
+              <th>date</th>
+              <th>delete</th>
+            </tr>
+            {listItems}
+          </table>
+        );
+      }
+
+    }
+  }
+      const root = document.getElementById('root');
+      ReactDOM.render(App(), root);
+
+    </script>
 
 </div>
 

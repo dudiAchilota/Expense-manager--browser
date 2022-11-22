@@ -105,9 +105,11 @@ public class ExpenseManagementController {
 
         return output;
     }
-
     @PostMapping("/ExpenseManagement/items")
     public String items() {
+        //
+        this.user = "dudi";
+        //
         String output = "";
         try {
             if (this.user == null) {
@@ -125,6 +127,7 @@ public class ExpenseManagementController {
     }
 
 
+
     @PostMapping("/ExpenseManagement/report")
     public String report(@RequestBody Dates dates) {
         String output = "";
@@ -134,11 +137,11 @@ public class ExpenseManagementController {
             if (user == null) {
 
             } else {
-                Report report = model.getReport(dates.getStart(),dates.getEnd(),user);
+                Report report = model.getReport(dates.getStart(), dates.getEnd(), user);
                 List<?> items = report.getListItem();
-                output = "{ \"items\" :" + items ;
+                output = "{ \"items\" :" + items;
                 output += ", \"sum\" :" + report.sumTotal();
-                output +=  "}";
+                output += "}";
             }
 
         } catch (ExpenseManagerException e) {
@@ -158,14 +161,13 @@ public class ExpenseManagementController {
             if (user == null) {
 
             } else {
-
-                java.util.Date date =  new java.util.Date();
+                java.util.Date date = new java.util.Date();
                 int month = date.getMonth() + 1;
                 int year = date.getYear() + 1900;
 
-                int []daysInMonth = {0,31,28,31,30, 31,30,31,31, 30,31,30,31};
+                int[] daysInMonth = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
                 // 28 or 29
-                if( (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0) ) {
+                if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
                     daysInMonth[2] = 29;
                 }
 
@@ -175,10 +177,10 @@ public class ExpenseManagementController {
                 int y;
                 for (int i = 0; i < 6; i++) {
                     y = month - i - 1;
-                    if(y <= 0) {
+                    if (y <= 0) {
                         months.add(y + 12);
                         years.add(year - 1);
-                    }else {
+                    } else {
                         months.add(y);
                         years.add(year);
                     }
@@ -187,33 +189,34 @@ public class ExpenseManagementController {
                 // -------------------------------------
                 List<Double> total = new LinkedList();
                 Report report = null;
-                Date start,end;
+                Date start, end;
 
                 for (int i = 0; i < 6; i++) {
-                    start = new Date(years.get(i) - 1900, months.get(i) -1, 1);
-                    end   = new Date(years.get(i) - 1900, months.get(i) - 1, daysInMonth[months.get(i)]);
-                    report = model.getReport(start,end,user);
+                    start = new Date(years.get(i) - 1900, months.get(i) - 1, 1);
+                    end = new Date(years.get(i) - 1900, months.get(i) - 1, daysInMonth[months.get(i)]);
+                    report = model.getReport(start, end, user);
                     total.add(report.sumTotal());
                 }
 
                 // current month
-                start = new Date(year - 1900, month -1, 1);
-                end =   new Date(year - 1900, month - 1, daysInMonth[month]);
-                double current = model.getReport(start,end,user).sumTotal();
+                start = new Date(year - 1900, month - 1, 1);
+                end = new Date(year - 1900, month - 1, daysInMonth[month]);
+                double current = model.getReport(start, end, user).sumTotal();
 
 
-                output = "{ \"items\" : ["  ;
+                output = "{ \"items\" : [";
                 for (int i = 0; i < 6; i++) {
-                    output += "{ \"sum\" :"+ total.get(i) +" }";
-                    if(i != 5) { output += ",";}
+                    output += "{ \"sum\" :" + total.get(i) + " }";
+                    if (i != 5) {
+                        output += ",";
+                    }
                 }
                 output += "]";
 
-                output +=  " ,\"current\" :" + current ;
+                output += " ,\"current\" :" + current;
                 output += "}";
             }
-        }
-        catch (NumberFormatException | ExpenseManagerException e) {
+        } catch (NumberFormatException | ExpenseManagerException e) {
             //e.printStackTrace();
         }
 
